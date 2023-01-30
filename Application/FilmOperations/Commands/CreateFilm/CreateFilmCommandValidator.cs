@@ -1,0 +1,20 @@
+using System;
+using FluentValidation;
+
+
+namespace WebApi.Application.FilmOperations.Commands.CreateFilm
+{
+    public class CreateFilmCommandValidator : AbstractValidator<CreateFilmCommand>
+    {
+        public CreateFilmCommandValidator()
+        {
+            RuleFor(command=> command.Model.FilmAdi).NotEmpty().MinimumLength(3);
+            RuleFor(command=> command.Model.FilmTuruId).NotEmpty().GreaterThan(0);
+            RuleFor(command=>command.Model.FilmYili.Date).NotEmpty().LessThan(DateTime.Now.Date);
+            RuleFor(command=>command.Model.YonetmenId).NotEmpty().GreaterThan(0);
+            RuleFor(command=>command.Model.Oyuncular).NotEmpty();
+            RuleFor(command=>command.Model.Fiyat).NotEmpty().GreaterThan(1);
+
+        }
+    }
+}
